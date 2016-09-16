@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOsc.h"
-#include "LightSystem2d.h"
+#include "LightSystem2D.h"
 
 
 class Sprinkle{

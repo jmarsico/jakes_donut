@@ -43,7 +43,7 @@ void ofApp::update(){
 //        temp.x = ofMap(s.loc.x, 0., 1., 0, ofGetWidth());
 //        temp.y = ofMap(s.loc.y, 0.f, 1.f, 0, ofGetHeight());
         p.setMode(ofPath::POLYLINES);
-        p.circle(temp, s.getfree1() * 10);
+        p.circle(temp, 2);
         
         ofx::Shape2D::SharedPtr shape = std::make_shared<ofx::Shape2D>();
         shape->setShape(p.getOutline()[0]);
@@ -64,6 +64,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 //    for (auto& p : sprinkles) { p.draw();}
+    ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
 }
 
 //--------------------------------------------------------------
