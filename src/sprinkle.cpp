@@ -8,6 +8,7 @@ Sprinkle::Sprinkle(float maxVel, float maxAcc) {
 
     loc.x = ofRandomuf();
     loc.y = ofMap(ofRandomuf(),0.0,1.0,0.0,maxY);
+    loc.z = ofRandom(1.);
     xVel = ofRandomf() * maxVel;
     yVel = ofRandomf() * maxVel;
     xAcc = ofRandomf() * maxAcc;
@@ -15,10 +16,7 @@ Sprinkle::Sprinkle(float maxVel, float maxAcc) {
     free1 = ofRandomuf();
     free2 = ofRandomuf();
 
-    p.setMode(ofPath::POLYLINES);
-    p.circle(loc, ofMap(free1, 0.0, 1.0, 1.0, 20.0));
     
-    shape->setShape(p.getOutline()[0]);
     
 }
 
@@ -36,6 +34,7 @@ Sprinkle::Sprinkle(const ofxOscMessage &m) {
   yAcc = m.getArgAsFloat(4);
   free1 = m.getArgAsFloat(5);
   free2 = m.getArgAsFloat(6);
+  loc.z = free1;
 
   // Handle starting on the right
   if (xVel < 0 ) { loc.x = 1.0;}

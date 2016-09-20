@@ -1,7 +1,6 @@
 #pragma once
 #include "ofMain.h"
 #include "ofxOsc.h"
-#include "LightSystem2D.h"
 
 
 class Sprinkle{
@@ -19,16 +18,14 @@ class Sprinkle{
     ofxOscMessage createOSCMessage() const;
     bool isOffScreen();
     
-    float getX() const {return loc.x;};
-    float getY() const {return loc.y;};
-    ofVec2f getLoc() { return loc;};
+    float getX() const {return loc.x;}
+    float getY() const {return loc.y;}
+    ofVec2f getLoc() { return loc;}
     float getfree1() const { return free1;};
     float getfree2() const { return free2;};
     
-    ofx::Shape2D::SharedPtr shape = std::make_shared<ofx::Shape2D>();
     
-    ofPath p;
-    ofVec2f loc;
+    ofVec3f loc;
 
 
   protected:

@@ -4,7 +4,8 @@
 #include "ofxOsc.h"
 #include "sprinkle.h"
 #include "donut_cop.h"
-#include "LightSystem2D.h"
+#include "ofxGui.h"
+#include "ofxColorGradient.h"
 
 
 class ofApp : public ofBaseApp{
@@ -20,8 +21,9 @@ public:
     void windowResized(int w, int h);
     void keyPressed(int key);
 
-    void makeLights();
-    void makeShapes();
+    ofVec3f mapToScreen(ofVec3f input);
+
+
 
     DonutCop donutCop;
 
@@ -30,8 +32,16 @@ public:
     void createSprinkles();
     void removeSprinkles();
     
-    ofx::LightSystem2D lightSystem;
-    ofx::Light2D::SharedPtr rotatingLight;
+
+    ofxPanel params;
+    ofParameter<bool> bEnableIndices;
+    ofParameter<float> connectionDistance;
+//    ofParameter<float>;
+
+    ofVboMesh mesh;
+
+    float width, height;
 
 
+    ofxColorGradient<ofColor> gradient;
 };
