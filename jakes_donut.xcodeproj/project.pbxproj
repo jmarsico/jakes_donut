@@ -30,6 +30,7 @@
 		BAD8DDDE1D89F2A700AB8BB5 /* Light2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAD8DDD81D89F2A700AB8BB5 /* Light2D.cpp */; };
 		BAD8DDDF1D89F2A700AB8BB5 /* LightSystem2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAD8DDDA1D89F2A700AB8BB5 /* LightSystem2D.cpp */; };
 		BAD8DDE01D89F2A700AB8BB5 /* Shape2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAD8DDDC1D89F2A700AB8BB5 /* Shape2D.cpp */; };
+		BAF829631D91D74B00C7A1D9 /* ofxColorGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAF829611D91D74B00C7A1D9 /* ofxColorGradient.cpp */; };
 		C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC8881B3C8C0A1C45F042E7A /* OscPrintReceivedElements.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
@@ -113,6 +114,8 @@
 		BAD8DDDB1D89F2A700AB8BB5 /* LightSystem2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LightSystem2D.h; sourceTree = "<group>"; };
 		BAD8DDDC1D89F2A700AB8BB5 /* Shape2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shape2D.cpp; sourceTree = "<group>"; };
 		BAD8DDDD1D89F2A700AB8BB5 /* Shape2D.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shape2D.h; sourceTree = "<group>"; };
+		BAF829611D91D74B00C7A1D9 /* ofxColorGradient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxColorGradient.cpp; sourceTree = "<group>"; };
+		BAF829621D91D74B00C7A1D9 /* ofxColorGradient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxColorGradient.h; sourceTree = "<group>"; };
 		BC8881B3C8C0A1C45F042E7A /* OscPrintReceivedElements.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = OscPrintReceivedElements.cpp; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPrintReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		C2FAC65C491D4231379F3298 /* ofxOscReceiver.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscReceiver.cpp; path = ../../../addons/ofxOsc/src/ofxOscReceiver.cpp; sourceTree = SOURCE_ROOT; };
 		C58862C6D212C8E8A83810F4 /* ofxOscMessage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscMessage.h; path = ../../../addons/ofxOsc/src/ofxOscMessage.h; sourceTree = SOURCE_ROOT; };
@@ -253,12 +256,31 @@
 			path = ../../../addons/ofxLight2D/src;
 			sourceTree = "<group>";
 		};
+		BAF8295F1D91D74B00C7A1D9 /* ofxColorGradient */ = {
+			isa = PBXGroup;
+			children = (
+				BAF829601D91D74B00C7A1D9 /* src */,
+			);
+			name = ofxColorGradient;
+			sourceTree = "<group>";
+		};
+		BAF829601D91D74B00C7A1D9 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BAF829611D91D74B00C7A1D9 /* ofxColorGradient.cpp */,
+				BAF829621D91D74B00C7A1D9 /* ofxColorGradient.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxColorGradient/src;
+			sourceTree = "<group>";
+		};
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				E6053AB7FEC63D5F83825B88 /* ofxOsc */,
 				BAD8DDD61D89F2A700AB8BB5 /* ofxLight2D */,
+				BAF8295F1D91D74B00C7A1D9 /* ofxColorGradient */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -456,6 +478,7 @@
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				BAD8DDDF1D89F2A700AB8BB5 /* LightSystem2D.cpp in Sources */,
+				BAF829631D91D74B00C7A1D9 /* ofxColorGradient.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,
 				5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */,

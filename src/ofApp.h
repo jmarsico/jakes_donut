@@ -35,10 +35,11 @@ public:
 
     ofxPanel params;
     ofParameter<bool> bEnableIndices;
-    ofParameter<float> connectionDistance;
+    ofParameter<int> connectionDistance;
+    ofParameter<bool> bDebug;
 //    ofParameter<float>;
 
-    ofVboMesh mesh;
+    ofMesh mesh;
 
     float width, height;
 

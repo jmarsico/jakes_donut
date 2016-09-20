@@ -4,6 +4,7 @@
 void ofApp::setup(){
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofEnableDepthTest();
+    ofSetFrameRate(60);
 
     mesh.setMode(OF_PRIMITIVE_LINES);
     mesh.enableIndices();
@@ -19,8 +20,9 @@ void ofApp::setup(){
 
 
     params.setup("params");
+    params.add(bDebug.set("debug", false));
     params.add(bEnableIndices.set("indices", false));
-    params.add(connectionDistance.set("conn dist", 100., 10., 500));
+    params.add(connectionDistance.set("conn dist", 100, 10, 500));
     params.setPosition(10,20);
 
 
@@ -30,10 +32,12 @@ void ofApp::setup(){
 void ofApp::update(){
 
     donutCop.update(sprinkles.size());
+    createSprinkles();
+    removeSprinkles();
 
     // Update the sprinkle system
     for (auto& p : sprinkles) {
-        p.update(donutCop.maxVelocity(),donutCop.maxAcceleration());
+        p.update(0.001,donutCop.maxAcceleration());
     }
 
     // add new sprinkles from messages
@@ -52,17 +56,17 @@ void ofApp::update(){
 
 
     mesh.enableIndices();
-    mesh.clearIndices();
+    
 
     if(bEnableIndices){
 
-
+        mesh.clearIndices();
         int numVerts = mesh.getNumVertices();
         for (int a=0; a<numVerts; ++a) {
             ofVec3f verta = mesh.getVertex(a);
             for (int b=a+1; b<numVerts; ++b) {
                 ofVec3f vertb = mesh.getVertex(b);
-                float distance = verta.distance(vertb);
+                int distance = (int)verta.distance(vertb);
                 if (distance <= connectionDistance) {
 //                    ofLog() << distance;
                     mesh.addIndex(a);
@@ -75,13 +79,15 @@ void ofApp::update(){
             mesh.addIndex(0);
         }
 
-    } else { mesh.addIndex(0);}
+    } else {
+        mesh.clearIndices();
+        mesh.addIndex(0);
+    }
 
     ofLog() << "num indices: " << mesh.getIndices().size();
 
 
-    createSprinkles();
-    removeSprinkles();
+
 
 }
 
@@ -89,9 +95,19 @@ void ofApp::update(){
 void ofApp::draw(){
     ofBackgroundGradient(ofColor(50,50,50), ofColor(0,0,0), OF_GRADIENT_CIRCULAR);
 
+    ofEnableDepthTest();
 //    for (auto& p : sprinkles) { p.draw();}
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
     mesh.draw();
+    
+    if(bDebug){
+        for(size_t i = 0; i < mesh.getNumVertices(); i++){
+            ofSetColor(255,0,0);
+            ofDrawSphere(mesh.getVertex(i), 20);
+        }
+    }
+    
+    ofDisableDepthTest();
     params.draw();
 }
 
@@ -107,6 +123,9 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 ofVec3f ofApp::mapToScreen(ofVec3f input){
     ofVec3f output;
+    input.x = ofClamp(input.x, 0., 1.);
+    input.y = ofClamp(input.y, 0., 1.);
+    input.z = ofClamp(input.z, 0., 1.);
     output.x = ofMap(input.x, 0., 1., 0, width);
     output.y = ofMap(input.y, 0., 1., 0, height);
     output.z = ofMap(input.z, 0., 1., 0, 1.);
@@ -126,7 +145,7 @@ void ofApp::createSprinkles() {
 
         // Add it to the sprinkles list
         sprinkles.push_back(p);
-        mesh.addVertex(mapToScreen(sprinkles.back().loc));
+        mesh.addVertex(sprinkles.back().loc);
         ofColor c = gradient.getColorAtPercent(ofMap(sprinkles.back().getfree2(), 0., 1., 0., 100.));
         mesh.addColor(c);
         // Tell the cop that we created one, so it can keep track
@@ -145,6 +164,7 @@ void ofApp::removeSprinkles() {
         if (sprinkles[i].isOffScreen()){
           donutCop.broadcastSprinkle(sprinkles[i]);
           mesh.removeVertex(i);
+            mesh.removeColor(i);
         }
 
     }
