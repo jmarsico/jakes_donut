@@ -16,6 +16,24 @@ void ofApp::setup(){
 
     gradient.addColor( ofColor::black );
     gradient.addColor( ofColor::pink );
+    gradient.addColor( ofColor::aquamarine );
+
+    model.loadModel("nose.3ds");
+    model.setScale(0.5,0.5,0.5);
+    model.setPosition(ofGetWidth()/2,ofGetHeight()/2 , 0);
+    noseMesh = model.getMesh(0);
+    
+    ofLog() << "num verts: " << model.getMesh(0).getNumVertices();
+    
+    noseMesh.setMode(OF_PRIMITIVE_TRIANGLES);
+    noseMesh.enableColors();
+    
+    float scale = 1.f/noseMesh.getNumVertices();
+
+    for(size_t i = 0; i < noseMesh.getNumVertices(); i++){
+        noseMesh.addColor(gradient.getColorAtPercent(i * scale ));
+    }
+
 
 
 
@@ -25,6 +43,8 @@ void ofApp::setup(){
     params.add(connectionDistance.set("conn dist", 100, 10, 500));
     params.setPosition(10,20);
 
+    
+    bShowGui = false;
 
 };
 
@@ -37,7 +57,7 @@ void ofApp::update(){
 
     // Update the sprinkle system
     for (auto& p : sprinkles) {
-        p.update(0.001,donutCop.maxAcceleration());
+        p.update(donutCop.maxVelocity(),donutCop.maxAcceleration());
     }
 
     // add new sprinkles from messages
@@ -53,6 +73,7 @@ void ofApp::update(){
 
     }
 
+    model.setPosition(ofGetMouseX(), ofGetMouseY(),0);
 
 
     mesh.enableIndices();
@@ -84,8 +105,7 @@ void ofApp::update(){
         mesh.addIndex(0);
     }
 
-    ofLog() << "num indices: " << mesh.getIndices().size();
-
+    
 
 
 
@@ -106,9 +126,19 @@ void ofApp::draw(){
             ofDrawSphere(mesh.getVertex(i), 20);
         }
     }
+    ofSetColor(255);
+    cam.lookAt(noseMesh.getCentroid());
+    cam.roll(cam.getRoll() + 1.f);
+    cam.begin();
     
-    ofDisableDepthTest();
-    params.draw();
+//    noseMesh.draw();
+    noseMesh.drawFaces();
+    cam.end();
+    
+    if(bShowGui){
+        ofDisableDepthTest();
+        params.draw();
+    }
 }
 
 //--------------------------------------------------------------
@@ -116,6 +146,7 @@ void ofApp::windowResized(int w, int h){}
 void ofApp::keyPressed(int key) {
     
     if (key == 32){donutCop.setId(1);}
+    if (key == 'g'){bShowGui = !bShowGui;}
     
 
 }
@@ -123,9 +154,6 @@ void ofApp::keyPressed(int key) {
 //--------------------------------------------------------------
 ofVec3f ofApp::mapToScreen(ofVec3f input){
     ofVec3f output;
-    input.x = ofClamp(input.x, 0., 1.);
-    input.y = ofClamp(input.y, 0., 1.);
-    input.z = ofClamp(input.z, 0., 1.);
     output.x = ofMap(input.x, 0., 1., 0, width);
     output.y = ofMap(input.y, 0., 1., 0, height);
     output.z = ofMap(input.z, 0., 1., 0, 1.);

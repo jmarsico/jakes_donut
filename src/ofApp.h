@@ -6,6 +6,7 @@
 #include "donut_cop.h"
 #include "ofxGui.h"
 #include "ofxColorGradient.h"
+#include "ofxAssimpModelLoader.h"
 
 
 class ofApp : public ofBaseApp{
@@ -37,11 +38,18 @@ public:
     ofParameter<bool> bEnableIndices;
     ofParameter<int> connectionDistance;
     ofParameter<bool> bDebug;
+    
+    bool bShowGui;
 //    ofParameter<float>;
 
     ofMesh mesh;
+    ofMesh noseMesh;
 
     float width, height;
+    ofxAssimpModelLoader model;
+    int numModelVerts;
+
+    ofEasyCam cam;
 
 
     ofxColorGradient<ofColor> gradient;
