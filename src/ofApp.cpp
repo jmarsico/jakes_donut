@@ -37,7 +37,7 @@ void ofApp::setup(){
     params.add(bEnableIndices.set("indices", true));
     params.add(connectionDistance.set("conn dist", 100, 10, 500));
     params.loadFromFile("settings.xml");
-    params.setPosition(10,20);
+    params.setPosition(10,10);
     
     lightGuiMain.setup("lightGuiMain", "lightGui.xml");
     lightGuiMain.add(bShowLights.set("show lights", true));
@@ -81,9 +81,9 @@ void ofApp::setup(){
 void ofApp::update(){
 
     donutCop.update(sprinkles.size());
-    createSprinkles();
+  //  createSprinkles();
     removeSprinkles();
-    
+    fps = (int)ofGetFrameRate();    
     
     if(centerCam){
         camPosX = width/2;
@@ -183,7 +183,7 @@ void ofApp::draw(){
     
     ofEnableDepthTest();
 //    for (auto& p : sprinkles) { p.draw();}
-    ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
+    //ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
     mesh.draw();
     
     if(bDebug){

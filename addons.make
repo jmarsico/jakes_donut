@@ -1,3 +1,5 @@
 ofxGui
 ofxLight2D
 ofxOsc
+ofxColorGradient
+ofxAssimpModelLoader

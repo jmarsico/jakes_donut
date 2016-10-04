@@ -1,42 +1,42 @@
 <objects>
 	<0>
 		<noise_motion>1</noise_motion>
-		<scale>34.0306</scale>
-		<xRot>0.00408163</xRot>
-		<yRot>0.00408163</yRot>
-		<zRot>0.00408163</zRot>
-		<xPos>0.0923469</xPos>
-		<yPos>0.1</yPos>
-		<zPos>0.0520408</zPos>
+		<scale>31.6429</scale>
+		<xRot>0.0122449</xRot>
+		<yRot>0</yRot>
+		<zRot>0</zRot>
+		<xPos>0.0887755</xPos>
+		<yPos>0.075</yPos>
+		<zPos>0.0892857</zPos>
 	</0>
 	<1>
 		<noise_motion>1</noise_motion>
-		<scale>14.1327</scale>
-		<xRot>0.00255102</xRot>
+		<scale>24.0816</scale>
+		<xRot>0</xRot>
 		<yRot>0</yRot>
 		<zRot>0</zRot>
-		<xPos>0.0831633</xPos>
-		<yPos>0.0709184</yPos>
-		<zPos>0.0964286</zPos>
+		<xPos>0.0132653</xPos>
+		<yPos>0.0867347</yPos>
+		<zPos>0.0607143</zPos>
 	</1>
 	<2>
 		<noise_motion>1</noise_motion>
-		<scale>40</scale>
-		<xRot>0.00204082</xRot>
+		<scale>22.2908</scale>
+		<xRot>0.0790816</xRot>
 		<yRot>0</yRot>
-		<zRot>0.0959184</zRot>
-		<xPos>0.0505102</xPos>
-		<yPos>0.0867347</yPos>
-		<zPos>0.1</zPos>
+		<zRot>0</zRot>
+		<xPos>0.0892857</xPos>
+		<yPos>0.0668367</yPos>
+		<zPos>0.0882653</zPos>
 	</2>
 	<3>
 		<noise_motion>1</noise_motion>
-		<scale>13.9337</scale>
-		<xRot>0.00459184</xRot>
-		<yRot>0.0137755</yRot>
-		<zRot>0.0255102</zRot>
-		<xPos>0.0714286</xPos>
-		<yPos>0.0505102</yPos>
-		<zPos>0.0913265</zPos>
+		<scale>15.7245</scale>
+		<xRot>0.0683673</xRot>
+		<yRot>0.0311224</yRot>
+		<zRot>0.0755102</zRot>
+		<xPos>0.0877551</xPos>
+		<yPos>0.0739796</yPos>
+		<zPos>0.0892857</zPos>
 	</3>
 </objects>
