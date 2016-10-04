@@ -8,6 +8,10 @@
 #include "ofxColorGradient.h"
 #include "ofxAssimpModelLoader.h"
 
+#include "lightManager.h"
+
+#include "thing.h"
+
 
 class ofApp : public ofBaseApp{
 
@@ -39,17 +43,44 @@ public:
     ofParameter<int> connectionDistance;
     ofParameter<bool> bDebug;
     
+    ofxPanel lightGuiMain;
+    ofParameter<bool> bShowLights;
+    
+    
+    ofxPanel camGui;
+    ofParameter<float> fps;
+    ofParameter<bool> bCamDebug;
+    ofParameter<float> fov;
+    ofParameter<bool> centerCam;
+    ofParameter<bool> sideCam;
+    ofParameter<float> camPosX;
+    ofParameter<float> camPosY;
+    ofParameter<float> camPosZ;
+    ofParameter<float> lookAtX;
+    ofParameter<float> lookAtY;
+    ofParameter<float> lookAtZ;
+    
+
+    
+    ofxPanel objectGui;
+    
+    
     bool bShowGui;
 //    ofParameter<float>;
 
     ofMesh mesh;
-    ofMesh noseMesh;
+    of3dPrimitive noseMesh;
 
     float width, height;
     ofxAssimpModelLoader model;
     int numModelVerts;
 
-    ofEasyCam cam;
+    ofCamera cam;
+    
+    
+    LightManager lights;
+
+    vector<Thing> things;
 
 
     ofxColorGradient<ofColor> gradient;

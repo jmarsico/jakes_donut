@@ -1,0 +1,38 @@
+<lightGuiMain>
+	<show_lights>1</show_lights>
+	<group>
+		<Debug>1</Debug>
+		<ambient>0</ambient>
+		<light_0>
+			<noise_motion>0</noise_motion>
+			<noise_speed>0.0115837</noise_speed>
+			<Color0>2</Color0>
+			<Trans_X>586.706</Trans_X>
+			<Trans_Y>760.277</Trans_Y>
+			<Trans_Z>15.8268</Trans_Z>
+			<look_at_X>720</look_at_X>
+			<look_at_Y>450</look_at_Y>
+			<look_at_Z>100</look_at_Z>
+			<Spec_0>0.448147</Spec_0>
+			<Diff_0>0.203457</Diff_0>
+			<Amb_0>0.0368597</Amb_0>
+			<Att_0>1</Att_0>
+		</light_0>
+		<light_1>
+			<noise_motion>0</noise_motion>
+			<noise_speed>0.0329076</noise_speed>
+			<Color0>4</Color0>
+			<Trans_X>203.015</Trans_X>
+			<Trans_Y>0</Trans_Y>
+			<Trans_Z>182.424</Trans_Z>
+			<look_at_X>285.481</look_at_X>
+			<look_at_Y>393.961</look_at_Y>
+			<look_at_Z>-77.8842</look_at_Z>
+			<Spec_0>0.30758</Spec_0>
+			<Diff_0>0.901083</Diff_0>
+			<Amb_0>0.130571</Amb_0>
+			<Att_0>0.692836</Att_0>
+		</light_1>
+	</group>
+<lightGuiMain/>
+</lightGuiMain>

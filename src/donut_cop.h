@@ -3,13 +3,13 @@
 #include "ofxOsc.h"
 #include "sprinkle.h"
 
-#define HOST "192.168.1.255"
+#define HOST "localhost"
 #define PORT 9000
 #define ID_EXPIRATION_IN_SECONDS 10
 #define MAXP 200
 #define MINP 100
-#define MAXC 1
-#define MAXV 0.01
+#define MAXC 1.0
+#define MAXV 0.001
 #define MAXA 0.001
 
 class DonutCop {

@@ -1,0 +1,14 @@
+<camera>
+	<FPS>0</FPS>
+	<center>0</center>
+	<side>0</side>
+	<cam_debug>0</cam_debug>
+	<FOV>17.1</FOV>
+	<cam_X>840</cam_X>
+	<cam_Y>525</cam_Y>
+	<cam_Z>2680</cam_Z>
+	<look_at_X>840</look_at_X>
+	<look_at_Y>525</look_at_Y>
+	<look_at_Z>0</look_at_Z>
+<camera/>
+</camera>

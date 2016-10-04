@@ -11,40 +11,69 @@ void ofApp::setup(){
     mesh.enableColors();
     width = ofGetWidth();
     height= ofGetHeight();
-
-
-
-    gradient.addColor( ofColor::black );
-    gradient.addColor( ofColor::pink );
-    gradient.addColor( ofColor::aquamarine );
-
-    model.loadModel("nose.3ds");
-    model.setScale(0.5,0.5,0.5);
-    model.setPosition(ofGetWidth()/2,ofGetHeight()/2 , 0);
-    noseMesh = model.getMesh(0);
     
-    ofLog() << "num verts: " << model.getMesh(0).getNumVertices();
-    
-    noseMesh.setMode(OF_PRIMITIVE_TRIANGLES);
-    noseMesh.enableColors();
-    
-    float scale = 1.f/noseMesh.getNumVertices();
+    cam.setupPerspective();
+    cam.setNearClip(10.f);
+    cam.setFarClip(6000.0f);
 
-    for(size_t i = 0; i < noseMesh.getNumVertices(); i++){
-        noseMesh.addColor(gradient.getColorAtPercent(i * scale ));
+
+    gradient.addColor( ofColor::fromHex(0xaed9da) );
+    gradient.addColor( ofColor::fromHex(0x3ddad7) );
+    gradient.addColor( ofColor::fromHex(0x135589) );
+
+
+    lights.init();
+    
+    
+    for(size_t i = 0; i < 4; i++){
+        Thing t;
+        t.init("nose.3ds", i);
+        things.push_back(t);
     }
-
-
 
 
     params.setup("params");
     params.add(bDebug.set("debug", false));
-    params.add(bEnableIndices.set("indices", false));
+    params.add(bEnableIndices.set("indices", true));
     params.add(connectionDistance.set("conn dist", 100, 10, 500));
+    params.loadFromFile("settings.xml");
     params.setPosition(10,20);
+    
+    lightGuiMain.setup("lightGuiMain", "lightGui.xml");
+    lightGuiMain.add(bShowLights.set("show lights", true));
+    lightGuiMain.add(lights.lightGui);
+    lightGuiMain.setPosition(params.getWidth() + 20, 10);
+    lightGuiMain.loadFromFile("lightGui.xml");
+    
+    camGui.setup("camera", "cameraGui.xml");
+    camGui.add(fps.set("FPS", 0, 0, 90));
+    camGui.add(centerCam.set("center", false));
+    camGui.add(sideCam.set("side", false));
+    camGui.add(bCamDebug.set("cam debug", false));
+    camGui.add(fov.set("FOV", 90, 0, 180));
+    camGui.add(camPosX.set("cam X", 500.f, -4000.f, 4000.f));
+    camGui.add(camPosY.set("cam Y", 500.f, -4000.f, 4000.f));
+    camGui.add(camPosZ.set("cam Z", 3000, 0, 4000));
+    camGui.add(lookAtX.set("look at X", 600, 0, 2000));
+    camGui.add(lookAtY.set("look at Y", 500, 0, 2000));
+    camGui.add(lookAtZ.set("look at Z", 0, -200, 2000));
+    camGui.setPosition(lightGuiMain.getPosition().x + lightGuiMain.getWidth() + 10, 10);
+    camGui.loadFromFile("cameraGui.xml");
+    
 
     
+    objectGui.setup("objects", "objectGui.xml");
+    for(auto & t : things){
+        objectGui.add(t.gui);
+    }
+    objectGui.loadFromFile("objectGui.xml");
+    objectGui.setPosition(10, params.getHeight() + 10);
+    
+    
+    
     bShowGui = false;
+    
+    donutCop.setId(1);
 
 };
 
@@ -54,10 +83,36 @@ void ofApp::update(){
     donutCop.update(sprinkles.size());
     createSprinkles();
     removeSprinkles();
+    
+    
+    if(centerCam){
+        camPosX = ofGetWidth()/2;
+        camPosY = ofGetHeight()/2;
+        camPosZ = 4000;
+        fov = 17.1;
+        lookAtX = camPosX;
+        lookAtY = camPosY;
+        lookAtZ = 0;
+        centerCam = false;
+    } else if(sideCam) {
+        camPosX = -4000;
+        camPosZ = 0;
+        camPosY = ofGetHeight()/2;
+        sideCam = false;
+    }
 
+    cam.setPosition(camPosX, camPosY, camPosZ);
+    cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0.f));
+    cam.setFov(fov);
+    
+    for(auto& t : things){
+        t.update();
+    }
+    
+    
     // Update the sprinkle system
     for (auto& p : sprinkles) {
-        p.update(donutCop.maxVelocity(),donutCop.maxAcceleration());
+        p.update(0.1,donutCop.maxAcceleration());
     }
 
     // add new sprinkles from messages
@@ -113,8 +168,19 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    ofBackgroundGradient(ofColor(50,50,50), ofColor(0,0,0), OF_GRADIENT_CIRCULAR);
+    ofEnableLighting();
+    
+    if(bShowLights){
+        lights.enableLights();
+        ofSetSmoothLighting(true);
+    }
+    
+    lights.update();
+    lights.draw();
 
+    ofBackground(ofColor::fromHex(0x2a93d5));
+    
+    
     ofEnableDepthTest();
 //    for (auto& p : sprinkles) { p.draw();}
     ofDrawBitmapString(ofToString(ofGetFrameRate()), 10, 10);
@@ -122,22 +188,38 @@ void ofApp::draw(){
     
     if(bDebug){
         for(size_t i = 0; i < mesh.getNumVertices(); i++){
-            ofSetColor(255,0,0);
-            ofDrawSphere(mesh.getVertex(i), 20);
+            ofSetColor(mesh.getColor(i));
+            ofDrawSphere(mesh.getVertex(i), 10);
         }
     }
     ofSetColor(255);
-    cam.lookAt(noseMesh.getCentroid());
-    cam.roll(cam.getRoll() + 1.f);
-    cam.begin();
     
-//    noseMesh.draw();
-    noseMesh.drawFaces();
+    
+    cam.begin();
+    for(auto& t : things){
+        t.draw();
+    }
+    ofSetColor(255, 50, 20);
+    ofRectangle r;
+    r.setFromCenter(ofPoint(ofGetWidth()/2, ofGetHeight()/2, 0), ofGetWidth(), ofGetHeight());
+    ofNoFill();
+    ofDrawRectangle(r);
+    
     cam.end();
+    
+    
+    if(bShowLights) {
+        lights.disableLights();
+        ofSetSmoothLighting(false);
+    }
     
     if(bShowGui){
         ofDisableDepthTest();
         params.draw();
+        lightGuiMain.draw();
+        camGui.draw();
+        objectGui.draw();
+
     }
 }
 
