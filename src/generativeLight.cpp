@@ -10,17 +10,21 @@
 
 //--------------------------------------------------------------
 void GenerativeLight::init(int ID){
+    
+    width = ofGetWidth();
+    height = ofGetHeight();
+    
     string name = "light ";
     name.append(ofToString(ID));
     params.setName(name);
     params.add(bNoiseMotion.set("noise motion", false));
     params.add(noiseSpeed.set("noise speed", 0.01, 0.0001, 0.1));
     params.add(col.set("Color0", 0, 0, 5));
-    params.add(transX.set("Trans X", ofGetWidth()/2.0, 0.0, ofGetWidth()));
-    params.add(transY.set("Trans Y", ofGetHeight()/2.0, 0.0, ofGetHeight()));
+    params.add(transX.set("Trans X", width/2.0, 0.0, width));
+    params.add(transY.set("Trans Y", height/2.0, 0.0, height));
     params.add(transZ.set("Trans Z", 100.0, -500.0, 500.0));
-    params.add(lookAtX.set("look at X", ofGetWidth()/2.0, 0.0, ofGetWidth()));
-    params.add(lookAtY.set("look at Y", ofGetHeight()/2.0, 0.0, ofGetHeight()));
+    params.add(lookAtX.set("look at X", width/2.0, 0.0, width));
+    params.add(lookAtY.set("look at Y", height/2.0, 0.0, height));
     params.add(lookAtZ.set("look at Z", 100.0, -500.0, 500.0));
     params.add(spec.set("Spec 0", 0.5, 0.0, 1.0));
     params.add(diff.set("Diff 0", 0.5, 0.0, 1.0));
@@ -42,8 +46,7 @@ void GenerativeLight::init(int ID){
     yNoiseCounter = ofRandom(0.1);
     zNoiseCounter = ofRandom(0.1);
     
-    width = ofGetWidth();
-    height = ofGetHeight();
+
     
 }
 

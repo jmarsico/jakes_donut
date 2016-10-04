@@ -9,13 +9,17 @@
 #include "thing.h"
 
 void Thing::init(string fileName, int ID){
+    
+    width = ofGetWidth();
+    height = ofGetHeight();
+    
     model.loadModel(fileName);
     mesh.getMesh() = model.getMesh(0);
     mesh.setScale(1.6);
     ofLog() << "num verts: " << model.getMesh(0).getNumVertices();
     mesh.getMesh().setMode(OF_PRIMITIVE_TRIANGLES);
     mesh.getMesh().enableColors();
-    mesh.setPosition(ofGetWidth()/2, ofGetHeight()/2, 0.f);
+    mesh.setPosition(width/2, height/2, 0.f);
     mesh.pan(180);
     mesh.tilt(90);
     gui.setName(ofToString(ID));
@@ -40,8 +44,8 @@ void Thing::update(){
         mesh.roll(3.f * ofSignedNoise(ofGetElapsedTimef() * xRot));
         mesh.pan(3.f * ofSignedNoise(ofGetElapsedTimef() * yRot));
         mesh.tilt(3.f * ofSignedNoise(ofGetElapsedTimef() * zRot));
-        mesh.setPosition(ofGetWidth() * ofNoise(ofGetElapsedTimef() * xPos),
-                         ofGetHeight() * ofNoise(ofGetElapsedTimef() * yPos),
+        mesh.setPosition(width * ofNoise(ofGetElapsedTimef() * xPos),
+                         height * ofNoise(ofGetElapsedTimef() * yPos),
                          20 * ofSignedNoise(ofGetElapsedTimef() * zPos)
                          );
     }

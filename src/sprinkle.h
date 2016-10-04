@@ -26,6 +26,8 @@ class Sprinkle{
     
     
     ofVec3f loc;
+    
+    int width, height;
 
 
   protected:

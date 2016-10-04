@@ -3,8 +3,10 @@
 //--------------------------------------------------------------
 // Generate the sprinkle with random parameters
 Sprinkle::Sprinkle(float maxVel, float maxAcc) {
+    width = ofGetWidth();
+    height = ofGetHeight();
 
-    maxY = float(ofGetHeight()) / float(ofGetWidth());
+    maxY = float(height) / float(width);
 
     loc.x = ofRandomuf();
     loc.y = ofMap(ofRandomuf(),0.0,1.0,0.0,maxY);
@@ -23,8 +25,10 @@ Sprinkle::Sprinkle(float maxVel, float maxAcc) {
 //--------------------------------------------------------------
 // Generate the sprinkle from an OSC message
 Sprinkle::Sprinkle(const ofxOscMessage &m) {
+    width = ofGetWidth();
+    height = ofGetHeight();
 
-  maxY = float(ofGetHeight()) / float(ofGetWidth());
+  maxY = float(height) / float(width);
 
   loc.x = 0;
   loc.y = m.getArgAsFloat(0);
@@ -67,8 +71,8 @@ void Sprinkle::draw() {
   ofFill();
   ofSetColor(0);
     ofVec3f tempLoc;
-  tempLoc.x = ofMap(loc.x,0.0, 1.0, 0.0, ofGetWidth());
-  tempLoc.y = ofMap(loc.y,0.0, maxY, 0.0, ofGetHeight());
+  tempLoc.x = ofMap(loc.x,0.0, 1.0, 0.0, width);
+  tempLoc.y = ofMap(loc.y,0.0, maxY, 0.0, height);
     
   ofDrawSphere(tempLoc, 10);
 }

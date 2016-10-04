@@ -86,8 +86,8 @@ void ofApp::update(){
     
     
     if(centerCam){
-        camPosX = ofGetWidth()/2;
-        camPosY = ofGetHeight()/2;
+        camPosX = width/2;
+        camPosY = height/2;
         camPosZ = 4000;
         fov = 17.1;
         lookAtX = camPosX;
@@ -97,12 +97,12 @@ void ofApp::update(){
     } else if(sideCam) {
         camPosX = -4000;
         camPosZ = 0;
-        camPosY = ofGetHeight()/2;
+        camPosY = height/2;
         sideCam = false;
     }
 
     cam.setPosition(camPosX, camPosY, camPosZ);
-    cam.lookAt(ofVec3f(ofGetWidth()/2, ofGetHeight()/2, 0.f));
+    cam.lookAt(ofVec3f(width/2, height/2, 0.f));
     cam.setFov(fov);
     
     for(auto& t : things){
@@ -201,7 +201,7 @@ void ofApp::draw(){
     }
     ofSetColor(255, 50, 20);
     ofRectangle r;
-    r.setFromCenter(ofPoint(ofGetWidth()/2, ofGetHeight()/2, 0), ofGetWidth(), ofGetHeight());
+    r.setFromCenter(ofPoint(width/2, height/2, 0), width, height);
     ofNoFill();
     ofDrawRectangle(r);
     

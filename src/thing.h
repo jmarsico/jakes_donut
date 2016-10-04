@@ -39,6 +39,8 @@ public:
     float pan;
     float tilt;
     
+    int width, height;
+    
     
 };
 
