@@ -22,7 +22,10 @@ void Thing::init(string fileName, int ID){
     mesh.setPosition(width/2, height/2, 0.f);
     mesh.pan(180);
     mesh.tilt(90);
-    gui.setName(ofToString(ID));
+    
+    string name = "nose ";
+    name += ofToString(ID);
+    gui.setName(name);
     gui.add(bSetNoise.set("noise motion", false));
     gui.add(scale.set("scale", 1.5, 1.0, 40.0));
     gui.add(xRot.set("xRot", 0.0, 0.0, 0.1f));
